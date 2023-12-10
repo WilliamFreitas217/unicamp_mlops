@@ -11,3 +11,5 @@ artifacts:
 plots:
 - dvclive/plots/metrics:
     x: step
+metrics:
+- dvclive/metrics.json
