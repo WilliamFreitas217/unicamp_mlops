@@ -8,8 +8,6 @@ artifacts:
     path: model.keras
     type: model
     desc: model
-metrics:
-- dvclive/metrics.json
 plots:
 - dvclive/plots/metrics:
     x: step
