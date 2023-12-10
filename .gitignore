@@ -160,7 +160,5 @@ cython_debug/
 #.idea/
 /model.keras*
 /ds
-/.dvc
 /.idea
 /dvc_plots
-/dvclive

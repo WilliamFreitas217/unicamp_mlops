@@ -1,14 +1,13 @@
 stages:
   train:
-    cmd: python src/main.py
+    cmd: python Untitled-1.py
     deps:
-    - src
     - ds
 artifacts:
-    model:
-        path: model.keras
-        type: model
-        desc: model
+  model:
+    path: model.keras
+    type: model
+    desc: model
 metrics:
 - dvclive/metrics.json
 plots:
