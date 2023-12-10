@@ -107,7 +107,7 @@ def main():
         "input_width": 224,
         "input_channels": 3,
         "batch_size": 64,
-        "epochs": 1,
+        "epochs": 10,
         "verbose": 1,
         "model_filepath": "./model.keras",
     }
