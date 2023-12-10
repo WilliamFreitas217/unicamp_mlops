@@ -1,13 +1,16 @@
 import pathlib
 
+from dvclive import Live
 from dvclive.keras import DVCLiveCallback
 from keras import layers, Sequential, optimizers
 from keras.preprocessing.image import ImageDataGenerator
+from dvc.api import params_show
 
 
 class Training:
-    def __init__(self, params):
+    def __init__(self, params, dvclive):
         self.params = params
+        self.dvclive = dvclive
         self.model_filepath = params['model_filepath']
         self.batch_size = params['batch_size']
         self.hwc = (
@@ -76,7 +79,7 @@ class Training:
     def train(self):
         train_ds, val_ds = self.load_ds()
 
-        dvc_callback = DVCLiveCallback()
+        dvc_callback = DVCLiveCallback(self.dvclive)
         callbacks = [dvc_callback]  # Add DVC callback to track metrics
 
         self.model.fit(
@@ -95,6 +98,8 @@ class Training:
         pathlib.Path(self.model_filepath).unlink(missing_ok=True)
         self.model.save(self.model_filepath)
 
+        self.dvclive.log_artifact(self.model_filepath, type='model', desc='model', name='model')
+
 
 def main():
     params = {
@@ -102,12 +107,12 @@ def main():
         "input_width": 224,
         "input_channels": 3,
         "batch_size": 64,
-        "epochs": 10,
+        "epochs": 1,
         "verbose": 1,
         "model_filepath": "./model.keras",
     }
-
-    Training(params).build_model().train().save_model()
+    with Live() as dvclive:
+        Training(params, dvclive).build_model().train().save_model()
 
 
 if __name__ == '__main__':

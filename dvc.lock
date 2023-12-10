@@ -1,0 +1,10 @@
+schema: '2.0'
+stages:
+  train:
+    cmd: python Untitled-1.py
+    deps:
+    - path: ds
+      hash: md5
+      md5: 18c367dcd521ee0b0859af90e2e6a171.dir
+      size: 227800180
+      nfiles: 10003
